@@ -1,6 +1,7 @@
 const sequalize = require('../db');
 const {DataTypes} = require('sequelize');
 
+
 const User = sequalize.define('user', {
     id: {type:DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     email: {type:DataTypes.STRING, unique: true, allowNull:false},
@@ -22,18 +23,18 @@ const UserInfo = sequalize.define('user_info', {
 });
 const Car = sequalize.define('car', {
     id: {type:DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    carBrand: {type:DataTypes.STRING, allowNull:false},
+    carbrand: {type:DataTypes.STRING, allowNull:false},
     model: {type:DataTypes.STRING, allowNull:false},
     color: {type:DataTypes.STRING, allowNull:false},
     year: {type:DataTypes.DATEONLY, allowNull:false},
     transmission: {type:DataTypes.STRING, allowNull:false},
     seats: {type:DataTypes.INTEGER, allowNull:false},
     power: {type:DataTypes.INTEGER, allowNull:false},
-    carClass: {type:DataTypes.STRING, allowNull:false},
-    carImg: {type:DataTypes.STRING,allowNull:false},
-    stateNum: {type:DataTypes.STRING, unique: true, allowNull:false},
+    carclass: {type:DataTypes.STRING, allowNull:false},
+    carimg: {type:DataTypes.STRING,allowNull:false},
+    statenum: {type:DataTypes.STRING, unique: true, allowNull:false},
     vin: {type:DataTypes.INTEGER,  unique: true, allowNull:false},
-    carAccessCode: {type:DataTypes.INTEGER, allowNull:false}
+    caraccesscode: {type:DataTypes.INTEGER, allowNull:false}
 });
 const Tariff = sequalize.define('tariff', {
     id: {type:DataTypes.INTEGER, primaryKey: true, autoIncrement: true},

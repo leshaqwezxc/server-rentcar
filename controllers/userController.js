@@ -15,6 +15,17 @@ const generateJwt = (id, email) => {
 }
 
 class UserController {
+
+    async getUser(req, res){
+        const {id} = req.params
+        const user = await User.findOne({
+            where: {id},
+            include: {
+                    association: "user_info"
+            }
+        })
+        return res.json(user)
+    }
     async registration(req, res, next){
         const {email, password} = req.body
         const candidate = await User.findOne({where: {email}})
@@ -32,7 +43,7 @@ class UserController {
         const userInfo = await UserInfo.create({firstName, lastName, patronymic, dateOfBirth, driveLicense, driveLicenseImg:fileName1, passport,passportImg: fileName2, phone, userPic, accessCode, userId: user.id})
         return res.json({user, userInfo})
     }
-    async login(req, res){
+    async login(req, res, next){
         const {email, password} = req.body
         const user = await User.findOne({where: {email}})
         if (!user) {
@@ -42,12 +53,12 @@ class UserController {
         if (!comparePassword) {
             return next(ApiError.internal('Указан неверный пароль'))
         }
-        const token = generateJwt(user.id, user.email)
-        return res.json({token})
+        const token = generateJwt(user.id, user.email) 
+        return res.json({user,token})
     }
     async check(req, res, next){
         const token = generateJwt(req.user.id, req.user.email)
-        return res.json({token})
+        return res.json({user})
     }
 }
 
